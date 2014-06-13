@@ -1,0 +1,9 @@
+{
+	"name": "monitored_process_remover",
+	"description": "monitored process pid file remover",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+		"zmq": "*"
+	}
+}
