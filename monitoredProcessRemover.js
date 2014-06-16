@@ -4,7 +4,7 @@ var _ = require('underscore');
 var argv = require('optimist')
 .default({
 	connect: "tcp://localhost:5557",
-	tmpFolder: "/tmp/process-manager/"
+	tmpFolder: "/tmp/process_manager/"
 }).argv;
 
 var subscriber = zmq.socket('sub');
