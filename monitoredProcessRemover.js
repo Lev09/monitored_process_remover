@@ -1,8 +1,12 @@
 var fs = require('fs');
 var zmq = require('zmq');
 var _ = require('underscore');
+var argv = require('optimist')
+.default({
+	connect: "tcp://localhost:5557",
+	tmpFolder: "/tmp/process-manager/"
+}).argv;
 
-var mainDir = '/tmp/process-manager/';
 var subscriber = zmq.socket('sub');
 
 subscriber.on('message', function(msg) {
@@ -11,11 +15,12 @@ subscriber.on('message', function(msg) {
 	removeProcess(processes);
 });
 
-subscriber.connect('tcp://localhost:5557');
+subscriber.connect(argv.connect);
 subscriber.subscribe('');
-console.log('listening on port: 5557');
+console.log('listening on ' + argv.connect);
 
 removeProcess = function(processes) {
+	var mainDir = argv.tmpFolder;
 
 	var removePid = function(folder, pid) {
 		fs.unlink(mainDir + folder + '/' + pid, function(error) {
